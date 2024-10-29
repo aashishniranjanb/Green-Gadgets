@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Gadgets - Contact Us</title>
+    <link rel="stylesheet" href="contact.css">
+</head>
+<body>
+    <!-- Header Section with Navbar -->
+    <header>
+        <div class="navbar">
+            <img src="logo2.jpg.png" alt="Green Gadgets Logo" class="logo">
+            <h1>Green Gadgets</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Content Section -->
+    <div class="content">
+        <h2>How Can We Help?</h2>
+        <p>Have a question for us or feedback? Select the most appropriate category below, fill out the form, and we'll get back to you soon.</p>
+        
+        <form>
+            <label for="category">Select a Category:</label>
+            <select id="category">
+                <option value="buying-product">Inquire about buying a product</option>
+                <option value="order-status">Check my order status</option>
+                <option value="partnership">Explore partnership opportunities</option>
+                <option value="feedback">Provide feedback or suggestions</option>
+                <option value="support">Request customer support</option>
+                <option value="other">Other inquiries</option>
+            </select>
+
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" placeholder="Enter your name">
+
+            <label for="email">Your Email:</label>
+            <input type="email" id="email" placeholder="Enter your email">
+
+            <label for="message">Your Message:</label>
+            <textarea id="message" placeholder="Type your message here"></textarea>
+
+            <label for="screenshot">Attach a Screenshot (optional):</label>
+            <input type="file" id="screenshot">
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector("form");
+            const nameInput = document.getElementById("name");
+            const emailInput = document.getElementById("email");
+            const messageInput = document.getElementById("message");
+    
+            form.addEventListener("submit", function (event) {
+                event.preventDefault(); // Prevent form submission
+    
+                // Clear any previous error messages
+                clearErrors();
+    
+                // Validate each field
+                let isValid = true;
+                
+                if (nameInput.value.trim() === "") {
+                    showError(nameInput, "Please enter your name.");
+                    isValid = false;
+                }
+                
+                if (emailInput.value.trim() === "" || !isValidEmail(emailInput.value)) {
+                    showError(emailInput, "Please enter a valid email.");
+                    isValid = false;
+                }
+                
+                if (messageInput.value.trim() === "") {
+                    showError(messageInput, "Please enter your message.");
+                    isValid = false;
+                }
+    
+                // If form is valid, submit it
+                if (isValid) {
+                    form.submit(); // Submit the form
+                }
+            });
+    
+            // Helper function to validate email format
+            function isValidEmail(email) {
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailPattern.test(email);
+            }
+    
+            // Helper function to display error message
+            function showError(inputElement, message) {
+                const errorDiv = document.createElement("div");
+                errorDiv.classList.add("error-message");
+                errorDiv.style.color = "red";
+                errorDiv.textContent = message;
+                inputElement.parentElement.insertBefore(errorDiv, inputElement.nextSibling);
+            }
+    
+            // Helper function to clear previous error messages
+            function clearErrors() {
+                const errors = document.querySelectorAll(".error-message");
+                errors.forEach(error => error.remove());
+            }
+        });
+    </script>
+    
+</body>
+</html>
